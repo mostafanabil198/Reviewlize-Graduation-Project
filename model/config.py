@@ -9,11 +9,9 @@ from .data_utils import get_trimmed_glove_vectors, load_vocab, \
 class Config():
     def __init__(self, load=True):
         """Initialize hyperparameters and load vocabs
-
         Args:
             load_embeddings: (bool) if True, load embeddings into
                 np array, else None
-
         """
         # directory for training outputs
         if not os.path.exists(self.dir_output):
@@ -29,11 +27,9 @@ class Config():
 
     def load(self):
         """Loads vocabulary, processing functions and embeddings
-
         Supposes that build_data.py has been run successfully and that
         the corresponding files have been created (vocab and trimmed GloVe
         vectors)
-
         """
         # 1. vocabulary
         self.vocab_words = load_vocab(self.filename_words)
@@ -88,6 +84,7 @@ class Config():
     filename_chars = "data/chars_res_2016.txt"
 
     # training
+    conv2_dim        = 300
     mlp_size         = 300
     train_embeddings = False
     nepochs          = 200
