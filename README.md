@@ -4,7 +4,7 @@ Reviewlize is a reviews analyzer web application that uses Aspect-Based Sentimen
 Extract the aspects in reviews, then extract the opinion related to each aspect. Finally, analyze the sentiment of each aspect.
 
 
-  # Flask Server Setup
+  ## Flask Server Setup
   - sudo apt install python3
   - Pip3 install stanza
   - pip3 install flask
@@ -14,7 +14,7 @@ Extract the aspects in reviews, then extract the opinion related to each aspect.
   - corenlp_dir = './corenlp'
   - stanza.install_corenlp(dir=corenlp_dir)
 
-  # Run Flask Server
+  ## Run Flask Server
   * python3 main.py
 
 
