@@ -1,6 +1,7 @@
 # Reviewlize-Graduation-Project
-Reviewlize is a reviews analyzer web application that uses Aspect-Based Sentiment Analysis (ABSA) to extract product aspects and their polarities from the reviews.
----
+ Reviewlize is a reviews analyzer web application that uses Aspect-Based Sentiment Analysis (ABSA) to extract product aspects and their polarities from the reviews.
+ 
+ ---
 ## Review Analyzer module 
 Extract the aspects in reviews, then extract the opinion related to each aspect. Finally, analyze the sentiment of each aspect.
 
