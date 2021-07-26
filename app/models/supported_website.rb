@@ -1,0 +1,2 @@
+class SupportedWebsite < ApplicationRecord
+end

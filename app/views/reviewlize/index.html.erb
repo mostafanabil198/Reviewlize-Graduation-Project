@@ -1,0 +1,31 @@
+
+<div class="d-flex flex-column justify-content-center align-items-center">
+  <%= form_with url: analyze_products_path, method: :get, local: true, html:{style:""} do |f| %>
+    <%= f.hidden_field :search_title, value: params[:search_word] %>
+    <% @results.each do |r| %>
+        <div class="card mb-3">
+          <div class="row g-0">
+              <div class="col-md-4 d-flex align-items-center justify-content-center">
+                <label class="d-flex align-items-center justify-content-around" style="width:100%">
+                  <%=f.check_box("products", {:multiple => true}, r, nil)%>
+                  <img src="<%=r[:image]%>" class="product_img">
+                </label>
+              </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <a href="<%= r[:url] %>" class="d-flex justify-content-center">
+                  <h5 class="card-title"><%= r[:title] %></h5>
+                </a>    
+                <p class="card-text"><%= r[:price] %></p>
+                <span class="card-text"><%= r[:reviews_count] %> Ratings</span>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+    <%end%>
+    <div class="my-5 d-flex justify-content-center">
+      <%= f.submit :analyze, class: "analyze_btn"%>
+    </div>
+  <%end%>
+</div>

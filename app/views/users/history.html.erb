@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Search Words</th>
+      <th scope="col">Analysis Type</th>
+      <th scope="col"># Analyzed Products</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @history_records.each do |hr| %>
+      <tr>
+        <td><a href="<%= analyze_products_path(history: true, history_record_id: hr.id )%>"><%= hr.search_title %></a></td>
+        <td><%= hr.analysis_type %></td>
+        <td><%= hr.history_products.count %></td>
+        <td><%= "#{hr.created_at.to_s.split(" ").first} - #{hr.created_at.to_s.split(" ").second}"%></td>
+      </tr>
+
+  <% end %>
+
+  </tbody>
+</table>

@@ -1,0 +1,5 @@
+  <div class="row justify-content-center my-5", style="width:100%">
+    <% @products.each do |prod| %>
+      <%= render 'product', prod: prod, history: @history %>
+    <%end%>
+  </div>

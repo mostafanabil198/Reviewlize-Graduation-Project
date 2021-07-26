@@ -1,0 +1,13 @@
+<h1 style="margin-top:50px">Let's Reviewlize!</h1>
+<p>Search for products or enter the url of a product to analyze</p>
+
+<%= form_with url: search_path, method: :get, local: true, html:{style:"width: 100%;width: 100%; justify-content: center;align-items: center;display: flex;"} do |f| %>
+    <%= f.text_field :search_word, class: "search_bar" %>
+    <%= f.submit :submit, class: "search_btn" %>
+<% end %>
+
+<div class="d-flex flex-row mt-4" style="width:50%;justify-content:space-evenly">
+  <i class="fa fa-amazon"></i>
+  <i class="fa fa-amazon"></i>
+  <i class="fa fa-amazon"></i>
+</div>
