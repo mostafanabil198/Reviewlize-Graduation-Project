@@ -2,7 +2,7 @@
  Reviewlize is a reviews analyzer web application that uses Aspect-Based Sentiment Analysis (ABSA) to extract product aspects and their polarities from the reviews.
  
  ---
-## Review Analyzer module 
+## Review Analyzer Module 
 Extract the aspects in reviews, then extract the opinion related to each aspect. Finally, analyze the sentiment of each aspect.
   
   ### Citation
@@ -18,7 +18,7 @@ Extract the aspects in reviews, then extract the opinion related to each aspect.
   - corenlp_dir = './corenlp'
   - stanza.install_corenlp(dir=corenlp_dir)
   
-  ### Running Model
+  ### Running The Model
   Download Glove embeddings (GloVe: http://nlp.stanford.edu/data/glove.840B.300d.zip )
 
   1. [DO NOT MISS THIS STEP] Build vocab from the data and extract trimmed glove vectors according to the config in `model/config.py`.
@@ -41,6 +41,23 @@ Extract the aspects in reviews, then extract the opinion related to each aspect.
   ### Run Flask Server
   * python3 main.py
  ---
+
+## Reviewlize Website Module 
+Client Interface to search for products and analyze their reviews.
+
+  ### Reviewlize Website Setup
+  - Install Ruby
+  - Install Ruby on Rails
+
+  ### Configuring The Website
+  In Project Folder open terminal and run the following.
+  - "bundle install"
+  - "rails db:create"
+  - "rails db:migrate"
+
+  ### Run Rails Server
+   * rails s
+
 
 
 
