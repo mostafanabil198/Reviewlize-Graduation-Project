@@ -6,7 +6,7 @@ import tensorflow as tf
 from .data_utils import minibatches, pad_sequences, get_chunks
 from .general_utils import Progbar
 from .base_model import BaseModel
-from sklearn.metrics import precision_recall_fscore_support
+from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 
 
 class ASPECTModel(BaseModel):
@@ -511,22 +511,27 @@ class ASPECTModel(BaseModel):
                     label_pred_arr.append(i)
                 gold+=lab
                 pred+=label_pred_arr
-                accs    += [a==b for (a, b) in zip(lab, label_pred_arr)]
-                lab_chunks      = set(get_chunks(lab, self.config.vocab_tags,message = "gold standard"))
-                lab_pred_chunks = set(get_chunks(label_pred_arr,
-                                                 self.config.vocab_tags,message = "prediction"))
+        #         accs    += [a==b for (a, b) in zip(lab, label_pred_arr)]
+        #         lab_chunks      = set(get_chunks(lab, self.config.vocab_tags,message = "gold standard"))
+        #         lab_pred_chunks = set(get_chunks(label_pred_arr,
+        #                                          self.config.vocab_tags,message = "prediction"))
 
-                correct_preds += len(lab_chunks & lab_pred_chunks)
-                total_preds   += len(lab_pred_chunks)
-                total_correct += len(lab_chunks)
+        #         correct_preds += len(lab_chunks & lab_pred_chunks)
+        #         total_preds   += len(lab_pred_chunks)
+        #         total_correct += len(lab_chunks)
 
-        p   = correct_preds / total_preds if correct_preds > 0 else 0
-        r   = correct_preds / total_correct if correct_preds > 0 else 0
-        f1  = 2 * p * r / (p + r) if correct_preds > 0 else 0
-        acc = np.mean(accs)
+        # p   = correct_preds / total_preds if correct_preds > 0 else 0
+        # r   = correct_preds / total_correct if correct_preds > 0 else 0
+        # f1  = 2 * p * r / (p + r) if correct_preds > 0 else 0
+        # acc = np.mean(accs)
+        sklearn_acc = accuracy_score(gold, pred)
         score = precision_recall_fscore_support(gold, pred, average='macro')
+        self.config.plt_acc.append(sklearn_acc)
+        self.config.plt_rec.append(score[1])
+        self.config.plt_prec.append(score[0])
+        self.config.plt_f1.append(score[2])
         #score_bi = precision_recall_fscore_support(gold, pred, labels =[1,2], average='macro')
-        return {"acc": 100*acc, "f1": 100*f1, "partial_matching_stat": score}
+        return {"Accuracy": 100*sklearn_acc, "f1": 100*score[2], "precision": score[0], "recall": score[1]}
 
 
     def predict(self, words_raw):

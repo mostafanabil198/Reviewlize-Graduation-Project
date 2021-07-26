@@ -61,13 +61,14 @@ class Config():
     path_log   = dir_output + "log.txt"
 
     # embeddings
-    dim_word = 306
+    dim_word = 300
     dim_char = 100
 
     # glove files
     filename_glove = "../aspect-extraction-master/data/glove.840B.300d.txt"
+    filename_glove_small = "../aspect-extraction-master/data/glove.6B.300d.txt"
     # trimmed embeddings (created from glove_filename with build_data.py)
-    filename_trimmed = "data/glove.840B.{}d.trimmed.npz".format(dim_word)
+    filename_trimmed = "data/glove.840B.{}d-copy.trimmed.npz".format(dim_word)
     use_pretrained = True
 
     # dataset
@@ -76,9 +77,9 @@ class Config():
     # filename_train = "data/coNLL/eng/eng.train.iob"
 
     #filename_dev = filename_test = filename_train = "data/test.txt" # test
-    filename_train = "../aspect-extraction-master/data/laptop_train_2014.iob"
-    filename_dev = "../aspect-extraction-master/data/laptop_test_2014.iob"
-    filename_test = "../aspect-extraction-master/data/laptop_test_2014.iob"
+    filename_train = "../aspect-extraction-master/data/Laptop_Train_v2.iob"
+    filename_dev = "../aspect-extraction-master/data/Laptop_Validate_v2.iob"
+    filename_test = "../aspect-extraction-master/data/Laptops_Test_Data_phaseB.iob"
 
     max_iter = None # if not None, max number of examples in Dataset
 
@@ -86,9 +87,13 @@ class Config():
     filename_words = "data/words_res_2016.txt"
     filename_tags = "data/tags_res_2016.txt"
     filename_chars = "data/chars_res_2016.txt"
-
+    #
+    plt_acc = []
+    plt_rec = []
+    plt_prec = []
+    plt_f1 = []
     # training
-    conv2_dim        = 300
+    conv2_dim        = 306
     mlp_size         = 300
     train_embeddings = False
     nepochs          = 200
@@ -96,7 +101,7 @@ class Config():
     dropout_conv     = 0.6
     batch_size       = 30
     lr_method        = "adam"
-    lr               = 0.0001
+    lr               = 0.001
     lr_decay         = 1
     clip             = 1 # if negative, no clipping
     nepoch_no_imprv  = 25

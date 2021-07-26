@@ -7,7 +7,9 @@ import string
 import nltk
 sent_tokenizer = nltk.tokenize.PunktSentenceTokenizer()
 
+
 corenlp_dir = './corenlp'
+#stanza.install_corenlp(dir=corenlp_dir)
 os.environ["CORENLP_HOME"] = corenlp_dir
 # stanza.install_corenlp(dir=corenlp_dir)
 from stanza.server import CoreNLPClient

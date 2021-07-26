@@ -71,8 +71,8 @@ class CoNLLDataset(object):
                         yield words, tags
                         words, tags = [], []
                 else:
-                    # ls = line.split('\t')
-                    ls = line.split(' ')
+                    ls = line.split('\t')
+                    # ls = line.split(' ')
                     word, tag, pos = ls[0],ls[-1], ls[1]
                     if self.processing_word is not None:
                         # if pos in ["CC","NN","JJ","VB","RB","IN"]:
@@ -215,8 +215,8 @@ def export_trimmed_glove_vectors(vocab, glove_filename, trimmed_filename, dim):
             word = line[0]
             embedding = [float(x) for x in line[1:]]
             if word in vocab:
-                word_idx = vocab[word]
-                embeddings[word_idx] = np.asarray(embedding + [0, 0, 0, 0, 0, 0])
+                word_idx = vocab[word] 
+                embeddings[word_idx] = np.asarray(embedding)
                 # tags = ["CC","NN","JJ","VB","RB","IN"]
                 # tags_val = [[0.,0.,0.,0.,0.,0.],
                 #             [0.,0.,0.,0.,0.,0.],

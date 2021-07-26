@@ -31,20 +31,21 @@ def main():
     # Build Word and Tag vocab
     vocab_words, vocab_tags = get_vocabs([train, dev, test])
     vocab_glove = get_glove_vocab(config.filename_glove)
-
-    vocab = vocab_words & vocab_glove
+    vocab_glove_small = get_glove_vocab(config.filename_glove_small)
+    vocab = vocab_glove_small & vocab_glove
+    #vocab = vocab_glove
     vocab.add(UNK)
     vocab.add(NUM)
     
-    new_vocab = list()
-    tags = ["CC","NN","JJ","VB","RB","IN"]
-    for s in vocab:
-        new_vocab.append(s)
-        for tag in tags:
-            new_s = s + '$' + tag
-            new_vocab.append(new_s)
+    # new_vocab = list()
+    # tags = ["CC","NN","JJ","VB","RB","IN"]
+    # for s in vocab:
+    #     new_vocab.append(s)
+    #     for tag in tags:
+    #         new_s = s + '$' + tag
+    #         new_vocab.append(new_s)
 
-    vocab = new_vocab
+    # vocab = new_vocab
     # Save vocab
     write_vocab(vocab, config.filename_words)
     write_vocab(vocab_tags, config.filename_tags)

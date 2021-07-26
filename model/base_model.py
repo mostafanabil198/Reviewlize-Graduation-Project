@@ -1,6 +1,6 @@
 import os
 import tensorflow as tf
-
+import glob
 
 class BaseModel(object):
     """Generic class for general methods that are not specific to Aspect"""
@@ -119,14 +119,28 @@ class BaseModel(object):
                         self.config.nepochs))
 
             score = self.run_epoch(train, dev, epoch)
-            
-
+            self.logger.info("Learning rate at epoch {:}".format(self.config.lr))
             # early stopping and saving best parameters
             if score >= best_score:
-                nepoch_no_imprv = 0
+
+              nepoch_no_imprv = 0
+              if score > 84:
+                files = glob.glob("results/test/model.weights/*") + glob.glob("results/test/model.weights/.*")
+                for f in files:
+                  open(f, 'w').close()
+                  os.remove(f)
+                files = glob.glob("results/test/*")
+                for f in files:
+                  if f != "results/test/model.weights" and f != "results/test/log.txt":
+                    open(f, 'w').close()
                 self.save_session()
-                best_score = score
-                self.logger.info("- new best score!")
+                  
+              best_score = score
+                # if score > 76.5 and self.config.first_decay == False:
+                #   self.config.first_decay = True
+                #   self.config.lr = .0001
+                #   self.config.lr_decay = .98
+              self.logger.info("- new best score!")
             else:
                 nepoch_no_imprv += 1
                 if nepoch_no_imprv >= self.config.nepoch_no_imprv:
@@ -134,6 +148,7 @@ class BaseModel(object):
                     #         "improvement".format(nepoch_no_imprv))
                     # break
                     self.config.lr *= self.config.lr_decay # decay learning rate
+                    nepoch_no_imprv = 0
 
 
     def evaluate(self, test):
@@ -146,6 +161,6 @@ class BaseModel(object):
         self.logger.info("Testing model over test set")
         metrics = self.run_evaluate(test)
         print(metrics.items())
-        msg = " - ".join(["{} {:04.2f}".format(k, v)
-                for k, v in list(metrics.items())[:2] ])
+        msg = " - ".join(["{} {}".format(k, v)
+                for k, v in metrics.items()])
         self.logger.info(msg)
